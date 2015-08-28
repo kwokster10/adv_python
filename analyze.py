@@ -54,15 +54,14 @@ def find_artist(artist_list):
 	all_artists = [x["ARTIST CLEAN"] for x in artist_list]
 	for artist in all_artists:
 		sort_artists[artist] = all_artists.count(artist)
-	return sorted(sort_artists, key=lambda x: x[1])
-##### need to fix this
+	return sorted(sort_artists.items(), key=lambda x: x[1], reverse=True)
 print find_artist(rows)[:10]
 
 # OR the easier way to do it with Python's built in function
 all_artists = [x["ARTIST CLEAN"] for x in rows]
 artists_by_count = Counter(all_artists)
 top_ten_artists = sorted(artists_by_count.items(), key=lambda x: x[1], reverse=True)
-print top_ten_artists[:20]
+print top_ten_artists[:10]
 
 # 6. How many different artists appear in the data?
 # set is unique
