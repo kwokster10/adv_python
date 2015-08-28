@@ -1,2 +1,3 @@
-# adv_python
-from GA Advanced Python course
+# Advanced Python Course
+
+From General Assembly's offered courses
