@@ -1,5 +1,6 @@
 # csv = comma separated values
 import csv
+# regex library
 import re
 from collections import Counter
 
@@ -18,7 +19,7 @@ songs = [x for x in rows if x["Release Year"] == "1981"]
 print len(songs)
 
 # 2. How many songs are from before 1984?
-# if not using regex
+# if not using regex, use function with try-catch
 def is_valid_year(year):
 	try: 
 		int(year)
@@ -27,11 +28,16 @@ def is_valid_year(year):
 	else: 
 		return int(year) > 1900
 
-print "There are {} songs before 1984.".format(len([x for x in rows if re.match("^[0-9]", x["Release Year"]) and int(x["Release Year"]) < 1984]))
+# this regex matches if x["Release Year"] is 4 digits
+print "There are {} songs before 1984.".format(len([x for x in rows if re.match("\d{4}", x["Release Year"]) and int(x["Release Year"]) < 1984]))
 
 # 3. What is the earliest release year in the data? (HINT: You might have to account for/clean up dirty data)
 valid_years = [int(x["Release Year"]) for x in rows if is_valid_year(x["Release Year"])]
 print min(valid_years)
+
+# another way with regex and string substitution 
+# this regex matches if x["Release Year"] is 4 digits starting with 19 or 20
+print "The earliest release year is %d" % min([int(x["Release Year"]) for x in rows if re.match("(19|20)\d{2}", x["Release Year"])])
 
 # 4. What are the top 20 songs by play count (HINT: use builtin sorted() function, documentation here: https://wiki.python.org/moin/HowTo/Sorting)
 def is_valid_count(playcount):
@@ -43,9 +49,15 @@ def is_valid_count(playcount):
 		return True
 
 get_counts = [x for x in rows if is_valid_count(x["PlayCount"])]
+
+# method 1
 top_songs = sorted(get_counts, key=lambda x: x["PlayCount"])
-# OR top_songs = sorted(get_counts, key=lambda x: x["PlayCount"], reverse=True)
-print [(x["Song Clean"], x["PlayCount"]) for x in top_songs[len(top_songs)-20:]]
+print [(x["Song Clean"], x["PlayCount"]) for x in top_songs[len(top_songs)-20:]][::-1]
+
+# OR method 2
+# top_songs = sorted(get_counts, key=lambda x: x["PlayCount"], reverse=True)
+# then print range wouldn't need to be reversed using slice
+# print [(x["Song Clean"], x["PlayCount"]) for x in top_songs[:20]]
 
 
 # 5. Who are the top 10 most prolific artists in the data along with the number of their songs that appear in the data?
@@ -55,6 +67,7 @@ def find_artist(artist_list):
 	for artist in all_artists:
 		sort_artists[artist] = all_artists.count(artist)
 	return sorted(sort_artists.items(), key=lambda x: x[1], reverse=True)
+	
 print find_artist(rows)[:10]
 
 # OR the easier way to do it with Python's built in function
