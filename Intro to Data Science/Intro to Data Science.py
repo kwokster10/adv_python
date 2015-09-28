@@ -1,3 +1,4 @@
+# Imported from iPython Notebook
 
 # coding: utf-8
 
@@ -522,20 +523,6 @@ accuracy = float(correct) / len(indices)
 print "SVC Accuracy: {}".format(accuracy)
 
 
-# # Sample Project
-# 
-# - scrape Reddit or similiar (beautiful soup)
-# - load that data into a django app (postgres)
-# - frontend takes a url
-# 
-# ## Resources
-# - [SkiKit](http://scikit-learn.org/stable/)
-# - [Panda's Documentation](http://pandas.pydata.org/)
-# - [Coursera](https://www.coursera.org/)
-# - [Beautiful Soup Docs](http://www.crummy.com/software/BeautifulSoup/bs4/doc/)
-# 
-
-# In[ ]:
 
 
 
