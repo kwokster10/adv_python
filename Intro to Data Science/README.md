@@ -15,4 +15,3 @@
 - [Panda's Documentation](http://pandas.pydata.org/)
 - [Coursera](https://www.coursera.org/)
 - [Beautiful Soup Docs](http://www.crummy.com/software/BeautifulSoup/bs4/doc/)
-
